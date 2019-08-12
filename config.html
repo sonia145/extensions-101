@@ -6,10 +6,13 @@
 </head>
 <body>
   <div class="extension"> 
+    <!--import extension helper library -->
+  <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
     <!-- basic form that allows streamer to select which WYR options --> 
     <form id = "form">
     <fieldset>
       <legend> Dilemma Options </legend> 
+      Select options that you would like the viewers to be able to choose from:<br>
       <div>
         <input type="checkbox" id = "one" name="option" value = "lose the ability to read" checked> 
         <label for="one">lose the ability to read </label>
@@ -30,17 +33,19 @@
           <input type="checkbox" id = "five" name="option" value = "turn every person you look at into stone" checked> 
           <label for="five">turn every person you look at into stone </label>
       </div>
-      <input type="submit" value="Submit">
       </fieldset> 
+      <input type="submit" value="Submit" onclick="updateConfig()">
     </form>
   </div>
-  
-<!--import jquery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-  
-<!--import extension helper library -->
-  <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
+
+  <!--import jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="common.js" type="text/javascript"></script>
+
+  <!-- import config.js -->
+  <script src="config.js" type="text/javascript"></script>
 </body>
 
 </html>
