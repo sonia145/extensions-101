@@ -1,16 +1,18 @@
-var options = [] 
+var token, userId;
+
+// so we don't have to write this out everytime 
+const twitch = window.Twitch.ext;
+
+// onContext callback called when context of an extension is fired 
+twitch.onContext((context) => {
+  console.log(context);
+});
 
 
-// Function to save the streamer's WYR options  
-$(function(){
-  $("#form").submit(function(e){
-    $('input[type=checkbox]').each(function () {
-      if (this.checked == true) {
-        var option = $(this).val();
-        options.push(option)
-      }
-    })
-    /* Feel free to check that the array is in fact saving the options checked */
-    //console.log(options)
-                                   } )  
-  })
+// onAuthorized callback called each time JWT is fired
+twitch.onAuthorized((auth) => {
+  // save our credentials
+  token = auth.token;  
+  userId = auth.userId; 
+});
+
