@@ -10,6 +10,5 @@ function updateOptions() {
 	$.each(options, function(i, p) {
 	    $('#selectB').append($('<option></option>').val(p).html(p));
 	});
-
 }
 
