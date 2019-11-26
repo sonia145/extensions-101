@@ -1,4 +1,5 @@
 var token, userId;
+var options = [];
 
 // so we don't have to write this out everytime 
 const twitch = window.Twitch.ext;
@@ -16,3 +17,41 @@ twitch.onAuthorized((auth) => {
   userId = auth.userId; 
 });
 
+
+function updateConfig(){
+  twitch.configuration.set("broadcaster", "1", JSON.stringify(options))
+}
+
+twitch.configuration.onChanged(function(){
+  //checks if config is defined
+  if(twitch.configuration.broadcaster){
+    try{
+      //Parse the array of options saved in broadcaster content
+      var config = JSON.parse(twitch.configuration.broadcaster.content)
+      console.log('Debug: hit onChanged try statement')
+      //Check if the content is an object
+      if(typeof config === "object"){
+        //updates value of the options array to be the config content
+        options = config
+        updateOptions()
+      }else{
+        console.log('invalid config')
+      }
+    }catch(e){
+      console.log('invalid config')
+    }
+  }
+})
+
+$(function(){
+  $("#form").submit(function (e){
+    e.preventDefault()
+    options = []
+    $('input[type=checkbox]').each(function() {
+      if (this.checked){
+        var option = $(this).val();
+        options.push(option)
+      }
+    })
+  })
+})
